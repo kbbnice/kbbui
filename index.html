@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+				
+			}
+			
+			.kbb-form-switch {
+				position: relative;
+				width: 55px;
+				height: 25px;
+				border: 1px solid grey;
+				border-radius: 25px;
+				cursor: pointer;
+			}
+			
+			.kbb-form-switch i {
+				display: inline-block;
+				width: 22px;
+				height: 22px;
+				margin: 1px 2px;
+				background-color: grey;
+				border-radius: 50%;
+				position: absolute;
+				left: 0;
+				animation: moveOffSwitch 0.1s 1;
+				-moz-animation: moveOffSwitch 0.1s 1;
+				/* Firefox */
+				-webkit-animation: moveOffSwitch 0.1s 1;
+				/* Safari 和 Chrome */
+				-o-animation: moveOffSwitch 0.1s 1;
+				/* Opera */
+			}
+			
+			.kbb-form-switch em {
+				width: 30px;
+				position: absolute;
+				right: 3px;
+				text-align: center;
+				font-size: 12px;
+				line-height: 25px;
+				color: grey;
+			}
+			
+			.kbb-form-onswitch {
+				background-color: #87d068;
+				border-color: #87d068;
+			}
+			
+			.kbb-form-onswitch i {
+				background-color: #fff;
+				left: 29px;
+				animation: moveOnSwitch 0.1s 1;
+				-moz-animation: moveOnSwitch 0.1s 1;
+				/* Firefox */
+				-webkit-animation: moveOnSwitch 0.1s 1;
+				/* Safari 和 Chrome */
+				-o-animation: moveOnSwitch 0.1s 1;
+				/* Opera */
+			}
+			
+			.kbb-form-onswitch em {
+				width: 30px;
+				position: absolute;
+				right: 22px;
+				text-align: center;
+				color: #fff;
+			}
+			
+			@keyframes moveOnSwitch {
+				0% {
+					left: 0;
+				}
+				100% {
+					left: 28px;
+				}
+			}
+			
+			@keyframes moveOffSwitch {
+				0% {
+					left: 28px;
+				}
+				100% {
+					left: 0;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="kbb-form-switch  kbb-form-onswitch">
+			<em>ON</em>
+			<i></i>
+		</div>
+
+		<script type="text/javascript">
+			$(function() {
+				var ifCommon = true;
+				function isCommonDepart() {
+
+					// 开关 switch
+					$('body').on('click', '.kbb-form-switch', function() {
+						$(this).toggleClass('kbb-form-onswitch');
+						if($(this).hasClass('kbb-form-onswitch')) {
+							$(this).find('em').html('ON');
+							ifCommon = true;
+						} else {
+							$(this).find('em').html('OFF');
+							ifCommon = false;
+						}
+					})
+
+					// 读取时判断是否为常见科室:
+					if(ifCommon === true) {
+						$('.kbb-form-switch').addClass('.kbb-form-onswitch');
+					}
+
+					// 文字不可选中:
+					$('body').on('selectstart', '.kbb-form-switch', function() {
+						return false;
+					})
+				}
+				
+				isCommonDepart();
+			})
+		</script>
+	</body>
+
+</html>
